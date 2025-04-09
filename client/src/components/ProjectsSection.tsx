@@ -224,7 +224,7 @@ export default function ProjectsSection() {
       transition={{ delay: 0.4, duration: 0.5 }}
     >
       <div className="flex justify-between items-center mb-4">
-        <h2 className="text-xl font-semibold text-foreground">Proyek GitHub</h2>
+        <h2 className="text-xl font-semibold text-foreground">Project</h2>
         {isLoading && (
           <div className="flex items-center text-muted-foreground text-sm">
             <svg className="animate-spin -ml-1 mr-2 h-4 w-4 text-primary" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">

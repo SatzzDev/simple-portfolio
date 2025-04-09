@@ -67,12 +67,12 @@ export default function ContactSection() {
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 0.6, duration: 0.5 }}
     >
-      <h2 className="text-xl font-semibold text-foreground mb-4">Hubungi Saya</h2>
+      <h2 className="text-xl font-semibold text-foreground mb-4">Contact Me</h2>
       
       <div className="grid md:grid-cols-2 gap-6">
         <div>
           <p className="text-muted-foreground mb-4">
-            Tertarik untuk bekerja sama atau punya pertanyaan? Jangan ragu untuk menghubungi saya.
+            Interested in collaborating or have a question? Feel free to contact me.
           </p>
           
           <div className="space-y-3 mt-6">
@@ -91,7 +91,7 @@ export default function ContactSection() {
                 <FaPhone />
               </div>
               <div className="ml-3">
-                <p className="text-sm font-medium text-foreground">Telepon</p>
+                <p className="text-sm font-medium text-foreground">Phone</p>
                 <p className="text-muted-foreground text-sm">+62 821 7098 8479</p>
               </div>
             </div>
@@ -101,7 +101,7 @@ export default function ContactSection() {
                 <FaMapMarker />
               </div>
               <div className="ml-3">
-                <p className="text-sm font-medium text-foreground">Lokasi</p>
+                <p className="text-sm font-medium text-foreground">Location</p>
                 <p className="text-muted-foreground text-sm">Pekanbaru, Indonesia</p>
               </div>
             </div>
@@ -116,8 +116,8 @@ export default function ContactSection() {
               animate={{ opacity: 1 }}
               transition={{ duration: 0.3 }}
             >
-              <p className="font-medium">Terima kasih atas pesan Anda!</p>
-              <p className="text-sm mt-2">Saya akan menghubungi Anda segera melalui email yang Anda berikan.</p>
+              <p className="font-medium">Thank you for your message!</p>
+              <p className="text-sm mt-2">I will contact you shortly via the email you provided.</p>
             </motion.div>
           ) : (
             <Form {...form}>
@@ -127,10 +127,10 @@ export default function ContactSection() {
                   name="name"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Nama Lengkap</FormLabel>
+                      <FormLabel>Full Name</FormLabel>
                       <FormControl>
                         <Input 
-                          placeholder="Masukkan nama Anda" 
+                          placeholder="Input your full name" 
                           className="px-4 py-2 border border-neutral-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
                           required
                           {...field}
@@ -146,7 +146,7 @@ export default function ContactSection() {
                   name="email"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Alamat Email</FormLabel>
+                      <FormLabel>Email Address</FormLabel>
                       <FormControl>
                         <Input 
                           placeholder="email@example.com" 
@@ -166,10 +166,10 @@ export default function ContactSection() {
                   name="message"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Pesan</FormLabel>
+                      <FormLabel>Message</FormLabel>
                       <FormControl>
                         <Textarea 
-                          placeholder="Ceritakan lebih detail tentang proyek atau pertanyaan Anda..."
+                          placeholder="Tell me more about your project or question in detail..."
                           className="min-h-[120px] px-4 py-2 border border-neutral-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
                           required
                           {...field}
@@ -185,7 +185,7 @@ export default function ContactSection() {
                   disabled={mutation.isPending}
                   className="w-full bg-gradient-to-r from-primary to-primary/70 text-primary-foreground px-4 py-2 rounded-lg hover:opacity-90 transition-opacity"
                 >
-                  {mutation.isPending ? "Mengirim..." : "Kirim Pesan"}
+                  {mutation.isPending ? "Sending..." : "Send Message"}
                 </Button>
               </form>
             </Form>

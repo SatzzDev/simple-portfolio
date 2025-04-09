@@ -25,7 +25,7 @@ export default function SkillsSection() {
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 0.5, duration: 0.5 }}
     >
-      <h2 className="text-xl font-semibold text-foreground mb-4">Keahlian</h2>
+      <h2 className="text-xl font-semibold text-foreground mb-4">Skills</h2>
       
       <div className="space-y-6">
         <div>

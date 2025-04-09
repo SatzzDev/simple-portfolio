@@ -43,7 +43,7 @@ export const defaultLinks: Link[] = [
   {
     id: 2,
     title: "My REST API",
-    description: "Layanan API untuk integrasi aplikasi",
+    description: "API service for application integration",
     url: "https://api.satzzdev.xyz",
     icon: "api",
     order: 2,
