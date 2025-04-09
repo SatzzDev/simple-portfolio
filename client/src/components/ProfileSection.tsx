@@ -11,7 +11,7 @@ interface ProfileSectionProps {
 export default function ProfileSection({ profile, socialLinks }: ProfileSectionProps) {
   return (
     <motion.div 
-      className="flex flex-col items-center mb-8"
+      className="flex flex-col items-center bg-background p-5 rounded-xl shadow-md border border-border"
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
@@ -21,19 +21,19 @@ export default function ProfileSection({ profile, socialLinks }: ProfileSectionP
         whileHover={{ scale: 1.05 }}
         transition={{ duration: 0.3 }}
       >
-        <div className="avatar-glow transition-all duration-300 rounded-full p-1 bg-gradient-to-r from-primary to-secondary">
-          <Avatar className="w-24 h-24 md:w-28 md:h-28 border-2 border-white">
+        <div className="avatar-glow transition-all duration-300 rounded-full p-1 bg-gradient-to-r from-primary to-primary/70">
+          <Avatar className="w-24 h-24 md:w-28 md:h-28 border-2 border-background">
             <AvatarImage src={profile.avatar} alt={profile.name} />
             <AvatarFallback>{profile.name.charAt(0)}</AvatarFallback>
           </Avatar>
         </div>
-        {profile.status === "online" && (
-          <div className="absolute -bottom-1 -right-1 bg-green-400 w-4 h-4 rounded-full border-2 border-white"></div>
+        {profile.status === "available" && (
+          <div className="absolute -bottom-1 -right-1 bg-green-500 w-4 h-4 rounded-full border-2 border-background"></div>
         )}
       </motion.div>
       
       <motion.h1 
-        className="text-2xl md:text-3xl font-bold text-neutral-800 text-center"
+        className="text-2xl md:text-3xl font-bold text-foreground text-center"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.2, duration: 0.5 }}
@@ -42,7 +42,7 @@ export default function ProfileSection({ profile, socialLinks }: ProfileSectionP
       </motion.h1>
       
       <motion.p 
-        className="text-neutral-700 text-center mt-2 max-w-sm"
+        className="text-muted-foreground text-center mt-2 max-w-sm"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.3, duration: 0.5 }}
@@ -62,7 +62,7 @@ export default function ProfileSection({ profile, socialLinks }: ProfileSectionP
             href={social.url}
             target="_blank"
             rel="noopener noreferrer"
-            className="w-8 h-8 flex items-center justify-center rounded-full bg-neutral-800 text-white hover:bg-primary transition-colors"
+            className="w-8 h-8 flex items-center justify-center rounded-full bg-primary/80 text-primary-foreground hover:bg-primary transition-colors"
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.95 }}
           >

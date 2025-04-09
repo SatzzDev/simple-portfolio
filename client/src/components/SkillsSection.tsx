@@ -20,20 +20,20 @@ export default function SkillsSection() {
 
   return (
     <motion.div
-      className="mt-8 bg-white p-5 rounded-xl shadow-sm"
+      className="mt-8 bg-background p-5 rounded-xl shadow-md border border-border"
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 0.5, duration: 0.5 }}
     >
-      <h2 className="text-xl font-semibold text-neutral-800 mb-4">Keahlian</h2>
+      <h2 className="text-xl font-semibold text-foreground mb-4">Keahlian</h2>
       
       <div className="space-y-6">
         <div>
           <div className="flex items-center justify-between mb-2">
-            <h3 className="font-medium text-neutral-700">Frontend</h3>
-            <div className="flex gap-1">
+            <h3 className="font-medium text-foreground">Frontend</h3>
+            <div className="flex flex-wrap gap-1">
               {frontendSkills.map(skill => (
-                <Badge key={skill.name} variant="outline" className="bg-primary/5 text-primary border-primary/20">
+                <Badge key={skill.name} variant="outline" className="bg-primary/10 text-primary border-primary/30">
                   {skill.name}
                 </Badge>
               ))}
@@ -43,8 +43,8 @@ export default function SkillsSection() {
             {frontendSkills.map(skill => (
               <div key={skill.name} className="space-y-1">
                 <div className="flex justify-between text-sm">
-                  <span>{skill.name}</span>
-                  <span className="text-neutral-500">{skill.level}%</span>
+                  <span className="text-foreground">{skill.name}</span>
+                  <span className="text-muted-foreground">{skill.level}%</span>
                 </div>
                 <Progress value={skill.level} className="h-2" />
               </div>
@@ -54,10 +54,10 @@ export default function SkillsSection() {
 
         <div>
           <div className="flex items-center justify-between mb-2">
-            <h3 className="font-medium text-neutral-700">Backend</h3>
-            <div className="flex gap-1">
+            <h3 className="font-medium text-foreground">Backend</h3>
+            <div className="flex flex-wrap gap-1">
               {backendSkills.map(skill => (
-                <Badge key={skill.name} variant="outline" className="bg-violet-50 text-violet-600 border-violet-200">
+                <Badge key={skill.name} variant="outline" className="bg-violet-500/10 text-violet-400 border-violet-500/30">
                   {skill.name}
                 </Badge>
               ))}
@@ -67,8 +67,8 @@ export default function SkillsSection() {
             {backendSkills.map(skill => (
               <div key={skill.name} className="space-y-1">
                 <div className="flex justify-between text-sm">
-                  <span>{skill.name}</span>
-                  <span className="text-neutral-500">{skill.level}%</span>
+                  <span className="text-foreground">{skill.name}</span>
+                  <span className="text-muted-foreground">{skill.level}%</span>
                 </div>
                 <Progress value={skill.level} className="h-2" />
               </div>
@@ -78,10 +78,10 @@ export default function SkillsSection() {
 
         <div>
           <div className="flex items-center justify-between mb-2">
-            <h3 className="font-medium text-neutral-700">Design</h3>
-            <div className="flex gap-1">
+            <h3 className="font-medium text-foreground">Design</h3>
+            <div className="flex flex-wrap gap-1">
               {designSkills.map(skill => (
-                <Badge key={skill.name} variant="outline" className="bg-emerald-50 text-emerald-600 border-emerald-200">
+                <Badge key={skill.name} variant="outline" className="bg-emerald-500/10 text-emerald-400 border-emerald-500/30">
                   {skill.name}
                 </Badge>
               ))}
@@ -91,8 +91,8 @@ export default function SkillsSection() {
             {designSkills.map(skill => (
               <div key={skill.name} className="space-y-1">
                 <div className="flex justify-between text-sm">
-                  <span>{skill.name}</span>
-                  <span className="text-neutral-500">{skill.level}%</span>
+                  <span className="text-foreground">{skill.name}</span>
+                  <span className="text-muted-foreground">{skill.level}%</span>
                 </div>
                 <Progress value={skill.level} className="h-2" />
               </div>

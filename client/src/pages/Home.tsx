@@ -27,7 +27,7 @@ export default function Home() {
 
   return (
     <motion.div 
-      className="font-sans bg-gradient-to-br from-neutral-100 to-neutral-200 min-h-screen flex flex-col items-center justify-center p-4 md:p-8"
+      className="font-sans bg-gradient-to-br from-black to-background min-h-screen flex flex-col items-center justify-center p-4 md:p-8"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
@@ -53,7 +53,9 @@ export default function Home() {
               </div>
               <div className="md:col-span-2">
                 <ProjectsSection />
-                <LinksSection links={links!} />
+                <div className="mt-8">
+                  <LinksSection links={links!} />
+                </div>
                 <ContactSection />
               </div>
             </div>
@@ -75,7 +77,7 @@ function LoadingSkeleton() {
       <div className="md:grid md:grid-cols-3 gap-4">
         <div className="md:col-span-1 space-y-4">
           {/* Profile skeleton */}
-          <div className="bg-white p-5 rounded-xl">
+          <div className="bg-background p-5 rounded-xl border border-border">
             <div className="flex flex-col items-center">
               <Skeleton className="w-28 h-28 rounded-full mb-4" />
               <Skeleton className="h-7 w-36 mb-2" />
@@ -89,7 +91,7 @@ function LoadingSkeleton() {
           </div>
           
           {/* Skills skeleton */}
-          <div className="bg-white p-5 rounded-xl">
+          <div className="bg-background p-5 rounded-xl border border-border">
             <Skeleton className="h-7 w-24 mb-4" />
             <div className="space-y-4">
               {[1, 2, 3].map(category => (
@@ -112,7 +114,7 @@ function LoadingSkeleton() {
         
         <div className="md:col-span-2 space-y-4 mt-4 md:mt-0">
           {/* Projects skeleton */}
-          <div className="bg-white p-5 rounded-xl">
+          <div className="bg-background p-5 rounded-xl border border-border">
             <Skeleton className="h-7 w-48 mb-4" />
             <Skeleton className="h-10 w-full mb-6" />
             <div className="space-y-4">
@@ -132,7 +134,7 @@ function LoadingSkeleton() {
           </div>
           
           {/* Contact skeleton */}
-          <Skeleton className="w-full h-80 rounded-xl" />
+          <Skeleton className="w-full h-80 rounded-xl border border-border" />
         </div>
       </div>
 

@@ -62,16 +62,16 @@ export default function ContactSection() {
 
   return (
     <motion.div 
-      className="mt-8 bg-white p-5 rounded-xl shadow-sm"
+      className="mt-8 bg-background p-5 rounded-xl shadow-md border border-border"
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 0.6, duration: 0.5 }}
     >
-      <h2 className="text-xl font-semibold text-neutral-800 mb-4">Hubungi Saya</h2>
+      <h2 className="text-xl font-semibold text-foreground mb-4">Hubungi Saya</h2>
       
       <div className="grid md:grid-cols-2 gap-6">
         <div>
-          <p className="text-neutral-700 mb-4">
+          <p className="text-muted-foreground mb-4">
             Tertarik untuk bekerja sama atau punya pertanyaan? Jangan ragu untuk menghubungi saya.
           </p>
           
@@ -81,8 +81,8 @@ export default function ContactSection() {
                 <FaEnvelope />
               </div>
               <div className="ml-3">
-                <p className="text-sm font-medium">Email</p>
-                <p className="text-neutral-600 text-sm">email@example.com</p>
+                <p className="text-sm font-medium text-foreground">Email</p>
+                <p className="text-muted-foreground text-sm">email@example.com</p>
               </div>
             </div>
             
@@ -91,8 +91,8 @@ export default function ContactSection() {
                 <FaPhone />
               </div>
               <div className="ml-3">
-                <p className="text-sm font-medium">Telepon</p>
-                <p className="text-neutral-600 text-sm">+62 812 3456 7890</p>
+                <p className="text-sm font-medium text-foreground">Telepon</p>
+                <p className="text-muted-foreground text-sm">+62 812 3456 7890</p>
               </div>
             </div>
             
@@ -101,8 +101,8 @@ export default function ContactSection() {
                 <FaMapMarker />
               </div>
               <div className="ml-3">
-                <p className="text-sm font-medium">Lokasi</p>
-                <p className="text-neutral-600 text-sm">Jakarta, Indonesia</p>
+                <p className="text-sm font-medium text-foreground">Lokasi</p>
+                <p className="text-muted-foreground text-sm">Jakarta, Indonesia</p>
               </div>
             </div>
           </div>
@@ -111,7 +111,7 @@ export default function ContactSection() {
         <div>
           {isSubmitted ? (
             <motion.div 
-              className="bg-green-50 text-green-700 p-5 rounded-lg"
+              className="bg-green-900/20 text-green-400 p-5 rounded-lg border border-green-700/20"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.3 }}
@@ -183,7 +183,7 @@ export default function ContactSection() {
                 <Button 
                   type="submit"
                   disabled={mutation.isPending}
-                  className="w-full bg-gradient-to-r from-primary to-secondary text-white px-4 py-2 rounded-lg hover:opacity-90 transition-opacity"
+                  className="w-full bg-gradient-to-r from-primary to-primary/70 text-primary-foreground px-4 py-2 rounded-lg hover:opacity-90 transition-opacity"
                 >
                   {mutation.isPending ? "Mengirim..." : "Kirim Pesan"}
                 </Button>

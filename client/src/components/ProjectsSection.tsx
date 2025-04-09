@@ -81,12 +81,12 @@ export default function ProjectsSection() {
 
   return (
     <motion.div
-      className="mt-8 bg-white p-5 rounded-xl shadow-sm"
+      className="mt-8 bg-background p-5 rounded-xl shadow-md border border-border"
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 0.4, duration: 0.5 }}
     >
-      <h2 className="text-xl font-semibold text-neutral-800 mb-4">Proyek Portfolio</h2>
+      <h2 className="text-xl font-semibold text-foreground mb-4">Proyek Portfolio</h2>
       
       <Tabs defaultValue="all" className="w-full">
         <TabsList className="grid w-full grid-cols-3 mb-4">
@@ -123,7 +123,7 @@ function ProjectCard({ project }: { project: Project }) {
       href={project.url}
       target="_blank"
       rel="noopener noreferrer"
-      className="block bg-neutral-50 rounded-lg overflow-hidden hover:shadow-md transition-shadow"
+      className="block bg-card rounded-lg overflow-hidden hover:shadow-lg border border-border transition-all"
       whileHover={{ y: -5 }}
       transition={{ duration: 0.2 }}
     >
@@ -136,11 +136,11 @@ function ProjectCard({ project }: { project: Project }) {
           />
         </div>
         <div className="p-4 md:w-2/3">
-          <h3 className="font-medium text-lg text-neutral-800">{project.title}</h3>
-          <p className="text-neutral-600 text-sm mt-1 mb-3">{project.description}</p>
+          <h3 className="font-medium text-lg text-foreground">{project.title}</h3>
+          <p className="text-muted-foreground text-sm mt-1 mb-3">{project.description}</p>
           <div className="flex flex-wrap gap-1.5">
             {project.technologies.map(tech => (
-              <Badge key={tech} variant="secondary" className="flex items-center text-xs px-2 py-0.5">
+              <Badge key={tech} variant="secondary" className="flex items-center text-xs px-2 py-0.5 bg-primary/10 text-primary border border-primary/20">
                 {getIcon(tech)}{tech}
               </Badge>
             ))}

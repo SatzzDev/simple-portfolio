@@ -104,26 +104,26 @@ export default function LinksSection({ links }: LinksSectionProps) {
           href={link.url}
           target="_blank"
           rel="noopener noreferrer"
-          className="link-card group block w-full bg-white rounded-xl p-4 shadow-sm hover:shadow-md transition-all"
+          className="link-card group block w-full bg-background rounded-xl p-4 shadow-md border border-border hover:shadow-lg transition-all"
           onClick={() => trackLinkClick(link)}
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 + index * 0.1, duration: 0.5 }}
-          whileHover={{ y: -3, boxShadow: "0 10px 20px rgba(0, 0, 0, 0.1)" }}
+          whileHover={{ y: -3, boxShadow: "0 10px 20px rgba(0, 0, 0, 0.2)" }}
         >
           <div className="flex items-center space-x-4">
-            <div className="w-10 h-10 flex-shrink-0 bg-gradient-to-br from-primary to-secondary rounded-lg flex items-center justify-center text-white">
+            <div className="w-10 h-10 flex-shrink-0 bg-gradient-to-br from-primary to-primary/70 rounded-lg flex items-center justify-center text-primary-foreground">
               <SocialIcon icon={link.icon} />
             </div>
             <div className="flex-grow">
-              <h3 className="font-medium text-neutral-800 group-hover:text-primary transition-colors">
+              <h3 className="font-medium text-foreground group-hover:text-primary transition-colors">
                 {link.title}
               </h3>
-              <p className="text-sm text-neutral-700">
+              <p className="text-sm text-muted-foreground">
                 {link.description}
               </p>
             </div>
-            <div className="text-neutral-400 group-hover:text-primary transition-colors">
+            <div className="text-muted-foreground group-hover:text-primary transition-colors">
               <FaChevronRight />
             </div>
           </div>
