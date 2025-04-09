@@ -1,0 +1,380 @@
+// server/index.ts
+import express2 from "express";
+
+// server/routes.ts
+import { createServer } from "http";
+
+// client/src/data/links.ts
+var defaultProfile = {
+  id: 1,
+  name: "Kurniawan Satria",
+  bio: "Full-stack developer & tech enthusiast. Specializing in Node.js backends and RESTful APIs with a passion for creating useful tools.",
+  avatar: "https://github.com/KurniawanSatria/SIMPLEEEEEE/blob/main/src/PFP.jpg?raw=true",
+  status: "available"
+};
+var defaultSocialLinks = [
+  {
+    id: 1,
+    platform: "Instagram",
+    url: "https://instagram.com/krniwnstria",
+    icon: "instagram"
+  },
+  {
+    id: 2,
+    platform: "Telegram",
+    url: "https://t.me/krniwnstria",
+    icon: "telegram"
+  },
+  {
+    id: 3,
+    platform: "WhatsApp",
+    url: "https://wa.me/6282170988479",
+    icon: "whatsapp"
+  }
+];
+var defaultLinks = [
+  {
+    id: 1,
+    title: "My YouTube Channel",
+    description: "Tech reviews & tutorials",
+    url: "https://youtube.com/SatzzDev",
+    icon: "youtube",
+    order: 1
+  },
+  {
+    id: 2,
+    title: "My REST API",
+    description: "API service for application integration",
+    url: "https://api.satzzdev.xyz",
+    icon: "api",
+    order: 2
+  }
+];
+
+// server/storage.ts
+var MemStorage = class {
+  users;
+  profile;
+  socialLinks;
+  links;
+  subscribers;
+  currentId;
+  subscriberId;
+  constructor() {
+    this.users = /* @__PURE__ */ new Map();
+    this.currentId = 1;
+    this.subscriberId = 1;
+    this.subscribers = /* @__PURE__ */ new Map();
+    this.profile = defaultProfile;
+    this.socialLinks = defaultSocialLinks;
+    this.links = defaultLinks;
+  }
+  // User methods (kept for compatibility)
+  async getUser(id) {
+    return this.users.get(id);
+  }
+  async getUserByUsername(username) {
+    return Array.from(this.users.values()).find(
+      (user) => user.username === username
+    );
+  }
+  async createUser(insertUser) {
+    const id = this.currentId++;
+    const user = { ...insertUser, id };
+    this.users.set(id, user);
+    return user;
+  }
+  // Profile methods
+  async getProfile() {
+    return this.profile;
+  }
+  // Social link methods
+  async getSocialLinks() {
+    return this.socialLinks;
+  }
+  // Link methods
+  async getLinks() {
+    return this.links;
+  }
+  // Subscriber methods
+  async addSubscriber(data) {
+    const existingSubscriber = await this.getSubscriberByEmail(data.email);
+    if (existingSubscriber) {
+      throw new Error("Email already exists");
+    }
+    const id = this.subscriberId++;
+    const subscriber = { ...data, id };
+    this.subscribers.set(id, subscriber);
+    return subscriber;
+  }
+  async getSubscriberByEmail(email) {
+    return Array.from(this.subscribers.values()).find(
+      (subscriber) => subscriber.email === email
+    );
+  }
+};
+var storage = new MemStorage();
+
+// shared/schema.ts
+import { pgTable, text, serial, integer } from "drizzle-orm/pg-core";
+import { createInsertSchema } from "drizzle-zod";
+var socialLinks = pgTable("social_links", {
+  id: serial("id").primaryKey(),
+  platform: text("platform").notNull(),
+  url: text("url").notNull(),
+  icon: text("icon").notNull()
+});
+var insertSocialLinkSchema = createInsertSchema(socialLinks).pick({
+  platform: true,
+  url: true,
+  icon: true
+});
+var profiles = pgTable("profiles", {
+  id: serial("id").primaryKey(),
+  name: text("name").notNull(),
+  bio: text("bio").notNull(),
+  avatar: text("avatar").notNull(),
+  status: text("status").default("online")
+});
+var insertProfileSchema = createInsertSchema(profiles).pick({
+  name: true,
+  bio: true,
+  avatar: true,
+  status: true
+});
+var links = pgTable("links", {
+  id: serial("id").primaryKey(),
+  title: text("title").notNull(),
+  description: text("description").notNull(),
+  url: text("url").notNull(),
+  icon: text("icon").notNull(),
+  order: integer("order").notNull()
+});
+var insertLinkSchema = createInsertSchema(links).pick({
+  title: true,
+  description: true,
+  url: true,
+  icon: true,
+  order: true
+});
+var subscribers = pgTable("subscribers", {
+  id: serial("id").primaryKey(),
+  email: text("email").notNull().unique()
+});
+var insertSubscriberSchema = createInsertSchema(subscribers).pick({
+  email: true
+});
+var users = pgTable("users", {
+  id: serial("id").primaryKey(),
+  username: text("username").notNull().unique(),
+  password: text("password").notNull()
+});
+var insertUserSchema = createInsertSchema(users).pick({
+  username: true,
+  password: true
+});
+
+// server/routes.ts
+import { fromZodError } from "zod-validation-error";
+async function registerRoutes(app2) {
+  app2.get("/api/profile", async (req, res) => {
+    try {
+      const profile = await storage.getProfile();
+      if (!profile) {
+        return res.status(404).json({ message: "Profile not found" });
+      }
+      res.json(profile);
+    } catch (error) {
+      res.status(500).json({ message: "Failed to fetch profile" });
+    }
+  });
+  app2.get("/api/social-links", async (req, res) => {
+    try {
+      const socialLinks2 = await storage.getSocialLinks();
+      res.json(socialLinks2);
+    } catch (error) {
+      res.status(500).json({ message: "Failed to fetch social links" });
+    }
+  });
+  app2.get("/api/links", async (req, res) => {
+    try {
+      const links2 = await storage.getLinks();
+      res.json(links2);
+    } catch (error) {
+      res.status(500).json({ message: "Failed to fetch links" });
+    }
+  });
+  app2.post("/api/subscribe", async (req, res) => {
+    try {
+      const validation = insertSubscriberSchema.safeParse(req.body);
+      if (!validation.success) {
+        const validationError = fromZodError(validation.error);
+        return res.status(400).json({ message: validationError.message });
+      }
+      const subscriber = await storage.addSubscriber(validation.data);
+      res.status(201).json(subscriber);
+    } catch (error) {
+      if (error instanceof Error && error.message.includes("already exists")) {
+        return res.status(409).json({ message: "Email already subscribed" });
+      }
+      res.status(500).json({ message: "Failed to subscribe" });
+    }
+  });
+  const httpServer = createServer(app2);
+  return httpServer;
+}
+
+// server/vite.ts
+import express from "express";
+import fs from "fs";
+import path2 from "path";
+import { createServer as createViteServer, createLogger } from "vite";
+
+// vite.config.ts
+import { defineConfig } from "vite";
+import react from "@vitejs/plugin-react";
+import themePlugin from "@replit/vite-plugin-shadcn-theme-json";
+import path from "path";
+import runtimeErrorOverlay from "@replit/vite-plugin-runtime-error-modal";
+var vite_config_default = defineConfig({
+  plugins: [
+    react(),
+    runtimeErrorOverlay(),
+    themePlugin(),
+    ...process.env.NODE_ENV !== "production" && process.env.REPL_ID !== void 0 ? [
+      await import("@replit/vite-plugin-cartographer").then(
+        (m) => m.cartographer()
+      )
+    ] : []
+  ],
+  resolve: {
+    alias: {
+      "@": path.resolve(import.meta.dirname, "client", "src"),
+      "@shared": path.resolve(import.meta.dirname, "shared"),
+      "@assets": path.resolve(import.meta.dirname, "attached_assets")
+    }
+  },
+  root: path.resolve(import.meta.dirname, "client"),
+  build: {
+    outDir: path.resolve(import.meta.dirname, "dist/public"),
+    emptyOutDir: true
+  }
+});
+
+// server/vite.ts
+import { nanoid } from "nanoid";
+var viteLogger = createLogger();
+function log(message, source = "express") {
+  const formattedTime = (/* @__PURE__ */ new Date()).toLocaleTimeString("en-US", {
+    hour: "numeric",
+    minute: "2-digit",
+    second: "2-digit",
+    hour12: true
+  });
+  console.log(`${formattedTime} [${source}] ${message}`);
+}
+async function setupVite(app2, server) {
+  const serverOptions = {
+    middlewareMode: true,
+    hmr: { server },
+    allowedHosts: true
+  };
+  const vite = await createViteServer({
+    ...vite_config_default,
+    configFile: false,
+    customLogger: {
+      ...viteLogger,
+      error: (msg, options) => {
+        viteLogger.error(msg, options);
+        process.exit(1);
+      }
+    },
+    server: serverOptions,
+    appType: "custom"
+  });
+  app2.use(vite.middlewares);
+  app2.use("*", async (req, res, next) => {
+    const url = req.originalUrl;
+    try {
+      const clientTemplate = path2.resolve(
+        import.meta.dirname,
+        "..",
+        "client",
+        "index.html"
+      );
+      let template = await fs.promises.readFile(clientTemplate, "utf-8");
+      template = template.replace(
+        `src="/src/main.tsx"`,
+        `src="/src/main.tsx?v=${nanoid()}"`
+      );
+      const page = await vite.transformIndexHtml(url, template);
+      res.status(200).set({ "Content-Type": "text/html" }).end(page);
+    } catch (e) {
+      vite.ssrFixStacktrace(e);
+      next(e);
+    }
+  });
+}
+function serveStatic(app2) {
+  const distPath = path2.resolve(import.meta.dirname, "public");
+  if (!fs.existsSync(distPath)) {
+    throw new Error(
+      `Could not find the build directory: ${distPath}, make sure to build the client first`
+    );
+  }
+  app2.use(express.static(distPath));
+  app2.use("*", (_req, res) => {
+    res.sendFile(path2.resolve(distPath, "index.html"));
+  });
+}
+
+// server/index.ts
+var app = express2();
+app.use(express2.json());
+app.use(express2.urlencoded({ extended: false }));
+app.use((req, res, next) => {
+  const start = Date.now();
+  const path3 = req.path;
+  let capturedJsonResponse = void 0;
+  const originalResJson = res.json;
+  res.json = function(bodyJson, ...args) {
+    capturedJsonResponse = bodyJson;
+    return originalResJson.apply(res, [bodyJson, ...args]);
+  };
+  res.on("finish", () => {
+    const duration = Date.now() - start;
+    if (path3.startsWith("/api")) {
+      let logLine = `${req.method} ${path3} ${res.statusCode} in ${duration}ms`;
+      if (capturedJsonResponse) {
+        logLine += ` :: ${JSON.stringify(capturedJsonResponse)}`;
+      }
+      if (logLine.length > 80) {
+        logLine = logLine.slice(0, 79) + "\u2026";
+      }
+      log(logLine);
+    }
+  });
+  next();
+});
+(async () => {
+  const server = await registerRoutes(app);
+  app.use((err, _req, res, _next) => {
+    const status = err.status || err.statusCode || 500;
+    const message = err.message || "Internal Server Error";
+    res.status(status).json({ message });
+    throw err;
+  });
+  if (app.get("env") === "development") {
+    await setupVite(app, server);
+  } else {
+    serveStatic(app);
+  }
+  const port = 5e3;
+  server.listen({
+    port,
+    host: "0.0.0.0",
+    reusePort: true
+  }, () => {
+    log(`serving on port ${port}`);
+  });
+})();
