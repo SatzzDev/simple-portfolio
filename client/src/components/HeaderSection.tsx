@@ -18,7 +18,7 @@ export default function HeaderSection() {
             animate={{ opacity: 1 }}
             transition={{ delay: 0.2, duration: 0.5 }}
           >
-            Portfolio <span className="text-primary">Budi Santoso</span>
+            Portfolio <span className="text-primary">Kurniawan Satria</span>
           </motion.h1>
           <motion.p
             className="text-muted-foreground"
@@ -26,7 +26,7 @@ export default function HeaderSection() {
             animate={{ opacity: 1 }}
             transition={{ delay: 0.3, duration: 0.5 }}
           >
-            Frontend Developer & UI/UX Designer
+            Backend Developer
           </motion.p>
         </div>
         

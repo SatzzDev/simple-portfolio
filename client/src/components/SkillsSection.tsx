@@ -3,14 +3,14 @@ import { Progress } from "@/components/ui/progress";
 import { Badge } from "@/components/ui/badge";
 
 const skills = [
-  { name: "React", level: 90, category: "frontend" },
+  { name: "React", level: 10, category: "frontend" },
   { name: "TypeScript", level: 85, category: "frontend" },
   { name: "Node.js", level: 80, category: "backend" },
-  { name: "UI/UX Design", level: 90, category: "design" },
-  { name: "Tailwind CSS", level: 95, category: "frontend" },
-  { name: "Express", level: 75, category: "backend" },
-  { name: "Figma", level: 85, category: "design" },
-  { name: "MongoDB", level: 70, category: "backend" },
+  { name: "UI/UX Design", level: 30, category: "design" },
+  { name: "Tailwind CSS", level: 70, category: "frontend" },
+  { name: "Express", level: 90, category: "backend" },
+  { name: "Figma", level: 10, category: "design" },
+  { name: "MongoDB", level: 40, category: "backend" },
 ];
 
 export default function SkillsSection() {

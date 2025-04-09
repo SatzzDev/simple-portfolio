@@ -82,7 +82,7 @@ export default function ContactSection() {
               </div>
               <div className="ml-3">
                 <p className="text-sm font-medium text-foreground">Email</p>
-                <p className="text-muted-foreground text-sm">email@example.com</p>
+                <p className="text-muted-foreground text-sm">satganzdevs@gmail.com</p>
               </div>
             </div>
             
@@ -92,7 +92,7 @@ export default function ContactSection() {
               </div>
               <div className="ml-3">
                 <p className="text-sm font-medium text-foreground">Telepon</p>
-                <p className="text-muted-foreground text-sm">+62 812 3456 7890</p>
+                <p className="text-muted-foreground text-sm">+62 821 7098 8479</p>
               </div>
             </div>
             
@@ -102,7 +102,7 @@ export default function ContactSection() {
               </div>
               <div className="ml-3">
                 <p className="text-sm font-medium text-foreground">Lokasi</p>
-                <p className="text-muted-foreground text-sm">Jakarta, Indonesia</p>
+                <p className="text-muted-foreground text-sm">Pekanbaru, Indonesia</p>
               </div>
             </div>
           </div>
