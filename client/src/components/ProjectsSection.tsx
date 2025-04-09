@@ -179,7 +179,7 @@ export default function ProjectsSection() {
     const fetchGithubRepos = async () => {
       try {
         setIsLoading(true);
-        const username = 'KurniawanSatria';
+        const username = 'SatzzDev';
         const response = await axios.get(`https://api.github.com/users/${username}/repos?sort=updated&per_page=6`);
         
         if (response.status === 200 && Array.isArray(response.data)) {

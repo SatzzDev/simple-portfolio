@@ -34,18 +34,18 @@ export const defaultSocialLinks: SocialLink[] = [
 export const defaultLinks: Link[] = [
   {
     id: 1,
-    title: "My WhatsApp Channel",
+    title: "My YouTube Channel",
     description: "Tech reviews & tutorials",
     url: "https://youtube.com/SatzzDev",
-    icon: "whatsapp",
+    icon: "youtube",
     order: 1,
   },
   {
     id: 2,
     title: "My REST API",
-    description: "Rest api",
+    description: "Layanan API untuk integrasi aplikasi",
     url: "https://api.satzzdev.xyz",
-    icon: "book",
+    icon: "api",
     order: 2,
   },
 ];

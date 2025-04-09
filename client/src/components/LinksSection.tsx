@@ -31,9 +31,13 @@ import {
   FaEnvelope, 
   FaPhone,
   FaMapMarker,
-  FaChevronRight
+  FaChevronRight,
+  FaServer,
+  FaCode,
+  FaCloud
 } from "react-icons/fa";
 import { BsLink45Deg } from "react-icons/bs";
+import { TbApi } from "react-icons/tb";
 
 export function SocialIcon({ icon }: { icon: string }) {
   const iconMap: Record<string, React.ReactNode> = {
@@ -66,6 +70,10 @@ export function SocialIcon({ icon }: { icon: string }) {
     email: <FaEnvelope />,
     location: <FaMapMarker />,
     phone: <FaPhone />,
+    server: <FaServer />,
+    api: <TbApi />,
+    code: <FaCode />,
+    cloud: <FaCloud />,
     // Add more icons as needed
   };
 
