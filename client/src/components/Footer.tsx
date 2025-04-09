@@ -14,10 +14,13 @@ export default function Footer({ name }: FooterProps) {
       animate={{ opacity: 1 }}
       transition={{ delay: 0.7, duration: 0.5 }}
     >
-      <p>© {currentYear} {name}. All rights reserved.</p>
+      <p>© {currentYear} {name}. Hak Cipta Dilindungi.</p>
       <div className="mt-2">
-        <a href="#" className="text-primary hover:underline">Privacy Policy</a> · 
-        <a href="#" className="text-primary hover:underline">Terms of Service</a>
+        <span className="text-neutral-500">Dibuat dengan ♥ menggunakan React + TypeScript</span>
+      </div>
+      <div className="mt-2">
+        <a href="#" className="text-primary hover:underline">Kebijakan Privasi</a> · 
+        <a href="#" className="text-primary hover:underline">Ketentuan Layanan</a>
       </div>
     </motion.footer>
   );
