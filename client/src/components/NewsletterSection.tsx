@@ -36,8 +36,10 @@ export default function ContactSection() {
 
   const mutation = useMutation({
     mutationFn: async (values: FormValues) => {
-      // Untuk demo, kita tetap gunakan API subscribe yang ada
-      const res = await apiRequest("POST", "/api/subscribe", { email: values.email });
+      const res = await apiRequest("POST", "/api/newsletter", { 
+        email: values.email, 
+        name: values.name 
+      });
       return res.json();
     },
     onSuccess: () => {

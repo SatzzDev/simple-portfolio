@@ -1,19 +1,16 @@
 {
   "version": 2,
-  "buildCommand": "npm run build",
+  "buildCommand": "vite build",
   "outputDirectory": "client/dist",
-  "functions": {
-    "api/profile.ts": {
-      "runtime": "@vercel/node"
+  "installCommand": "npm install",
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "/api/$1"
     },
-    "api/social-links.ts": {
-      "runtime": "@vercel/node"
-    },
-    "api/links.ts": {
-      "runtime": "@vercel/node"
-    },
-    "api/newsletter.ts": {
-      "runtime": "@vercel/node"
+    {
+      "src": "/(.*)",
+      "dest": "/client/dist/$1"
     }
-  }
+  ]
 }
