@@ -100,13 +100,23 @@ export default function LinksSection({ links }: LinksSectionProps) {
   };
 
   return (
-    <iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/52TJVlE9edzvesKLKDEfrB?utm_source=generator&theme=0" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-    <motion.div 
-      className="space-y-3 w-full"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ delay: 0.2, duration: 0.5 }}
-    >
+    <div className="space-y-6 w-full">
+      <iframe 
+        style={{ borderRadius: "12px" }} 
+        src="https://open.spotify.com/embed/playlist/52TJVlE9edzvesKLKDEfrB?utm_source=generator&theme=0" 
+        width="100%" 
+        height="152" 
+        frameBorder="0" 
+        allowFullScreen={true}
+        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
+        loading="lazy"
+      />
+      <motion.div 
+        className="space-y-3 w-full"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.2, duration: 0.5 }}
+      >
       {links.sort((a, b) => a.order - b.order).map((link, index) => (
         <motion.a
           key={link.id}
@@ -138,6 +148,7 @@ export default function LinksSection({ links }: LinksSectionProps) {
           </div>
         </motion.a>
       ))}
-    </motion.div>
+      </motion.div>
+    </div>
   );
 }
