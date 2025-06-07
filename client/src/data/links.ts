@@ -34,10 +34,10 @@ export const defaultSocialLinks: SocialLink[] = [
 export const defaultLinks: Link[] = [
   {
     id: 1,
-    title: "My YouTube Channel",
+    title: "Telegram Channel",
     description: "Tech reviews & tutorials",
-    url: "https://youtube.com/SatzzDev",
-    icon: "youtube",
+    url: "https://t.me/SatzzDev",
+    icon: "telegram",
     order: 1,
   },
   {
